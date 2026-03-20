@@ -1,0 +1,53 @@
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class TextAnalyzer {
+    public static void main(String[] args) {
+        HashMap<String,Integer> val=new HashMap<>();
+        Scanner sc =new Scanner(System.in);
+        System.out.println("Enter text:");
+        String s=sc.nextLine();
+        String[] words=s.split(" ");
+        for(int i=0;i<words.length;i++){
+            val.put(words[i],val.getOrDefault(words[i],0)+1);
+        }
+        int count=0;
+        String maxWord="";
+        for(String key:val.keySet()){
+            if(val.get(key)>count){
+                count=val.get(key);
+                maxWord=key;
+            }
+        }
+        System.out.println("Most Frequent word:"+ maxWord);
+        
+        System.out.println("Duplicate words:");
+        for(String key:val.keySet()){
+            if(val.get(key)>1){
+                System.out.println(key);
+            }
+        }
+        System.out.println("Enter word to search:");
+        String search=sc.nextLine();
+
+        if(val.containsKey(search)){
+            System.out.println("Found "+val.get(search)+" "+"times");
+        }else{
+            System.out.println("Not Found");
+        }
+        System.out.println("Enter word1:");
+        String word1=sc.nextLine();
+        System.out.println("Enter word2:");
+        String word2=sc.nextLine();
+        char[] ch1=word1.toCharArray();
+        char[] ch2=word2.toCharArray();
+        Arrays.sort(ch1);
+        Arrays.sort(ch2);
+        if(Arrays.equals(ch1,ch2)){
+            System.out.println("Anagram");
+        }else{
+            System.out.println("Not Anagram");
+        }
+    }   
+}
